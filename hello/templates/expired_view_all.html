@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}
+Cabinet
+{% endblock title %}
+{% block body %}
+<br>
+<div class="container mb-3 py-4 w-50" style="border:5px solid LightGray;background-color:AliceBlue;">
+<form method="post" action="/expired_view_all">
+  {% csrf_token %}
+  <!--div class="row g-3"-->
+  <div class="d-flex justify-content-around">   
+      <div class="col-auto" >
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="project">
+        <option selected value="ALL">--Project--</option>
+        {% for result in project_table%}
+        <option value={{result.id}}>{{result.name}}</option>
+        {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="vendor">
+        <option selected value="ALL">--Vendor--</option>
+        {% for result2 in vendor_table%}
+        <option value={{result2.id}}>{{result2.name}}</option>
+        {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="duration" id="inlineRadio1" value="30days">
+          <label class="form-check-label" for="inlineRadio1">30 Days</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="duration" id="inlineRadio2" value="60days">
+          <label class="form-check-label" for="inlineRadio2">90 Days</label>
+        </div>
+      </div>
+    
+    
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+</form>
+</div>
+  <div class="container" style="color:White">
+    <h1> All Cabinet entries in AMCMS</h1>
+    <hr>
+ 
+
+<table class="table table-hover">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">S No.</th>
+        <th scope="col">Project</th> 
+        <th scope="col">Vendor</th>
+        <th scope="col">PO</th>
+        <th scope="col">Description</th>
+        <th scope="col">End Date</th>
+        <th scope="col">PR Number</th>
+        <th scope="col">PR Date</th>
+      </tr>
+    </thead>
+        {% for loop in expired_table %}
+    <tbody>
+      <tr class="table-primary">
+        <th scope="row">{{loop.id}}</th>
+        <td>{{loop.project}}</td>
+        <td>{{loop.vendor}}</td>
+        <td>{{loop.PO}}</td>
+        <td>{{loop.desc}}</td>
+        <td>{{loop.enddate}}</td>
+        <td>{{loop.PR}}</td>
+        <td>{{loop.PRdate}}</td>
+    </tbody>
+    {%endfor%}
+  </table>
+</div>
+
+
+{{context}}
+
+{% endblock body %} 

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+Filter
+{% endblock title %}
+{% block body %}
+{{context}}
+
+<form="form" method="post" action="/view_all">
+  {% csrf_token %}
+  <div class="form-group">
+    <label>Project:</label>
+    <select name="project">
+    <option selected disabled="true">--Project--</option>
+    {% for result in project_table%}
+    <option value={{result.id}}>{{result.name}}</option>
+    {% endfor %}
+    </select>
+  </div>
+  <br>
+  <div class="form-group">
+    <label>Vendor:</label>
+    <select name="vendor">
+    <option selected disabled="true">--Vendor--</option>
+    {% for result2 in vendor_table%}
+    <option value={{result2.id}}>{{result2.name}}</option>
+    {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Search</button>
+
+</form>
+
+{% endblock body %} 

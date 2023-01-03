@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+Cabinet
+{% endblock title %}
+{% block body %}
+<br>
+<br>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container" style="color:White">
+      <h1 class="display-4">Edit Cabinet PO</h1>
+      <p class="lead">Hey {{request.user}}!! please type in PO number to Edit expired PO</p>
+    </div>
+  </div>
+<br>
+<br>
+<form "form-horizontal" method="post" action="/expired_edit">
+    {% csrf_token %}
+    <div class="container mb-3 py-4 w-50"> 
+    <div class="input-group">
+        <input type="text" class="form-control rounded" placeholder="AMC PO Number" id="expired_search_PO" name="expired_search_PO" />
+        <button type="submit" class="btn btn-primary">search</button>
+    </div>
+    </div>
+</form>
+{% endblock body %}

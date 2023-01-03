@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+Update
+{% endblock title %}
+{% block body %}
+<br>
+<br>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container" style="color:White">
+      <h1 class="display-4">Update Status of Active PO</h1>
+      <p class="lead">Hey {{request.user}}!! please type in PO number to Update Status</p>
+    </div>
+  </div>
+<br>
+<br>
+<form "form-horizontal" method="post" action="/update">
+    {% csrf_token %}
+    <div class="container mb-3 py-4 w-50"> 
+    <div class="input-group">
+        <input type="text" class="form-control rounded" placeholder="AMC PO Number" id="update_search_PO" name="update_search_PO" />
+        <button type="submit" class="btn btn-primary">search</button>
+    </div>
+    </div>
+</form>
+{% endblock body %}

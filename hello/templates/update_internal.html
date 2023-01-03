@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}
+Edit
+{% endblock title %}
+{% block body %}
+<div class="container mb-3 py-4"> 
+  <h1 class="text-center" style="color:White"> -----Update Status of Existing AMC PO: {{basetable.PO}}----- </h1>
+  <br>
+  <hr class="solid">
+  <br>
+    <form "form-horizontal" method="post">
+    {% csrf_token %}
+    
+    <div class="row g-3" style="color:White">
+      <div class="col">
+        <label class="control-label" for="enddate">PM (Per Quarter):</label>
+        <div class="form-check form-check-inline">
+          {% if basetable.PMC1 == True %}
+          <input class="form-check-input" type="checkbox" id="PMC1" name="PMC1" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="PMC1" name="PMC1" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.PMC2 == True %}
+          <input class="form-check-input" type="checkbox" id="PMC2" name="PMC2" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="PMC2" name="PMC2" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.PMC3 == True %}
+          <input class="form-check-input" type="checkbox" id="PMC3" name="PMC3" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="PMC3" name="PMC3" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.PMC4 == True %}
+          <input class="form-check-input" type="checkbox" id="PMC4" name="PMC4" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="PMC4" name="PMC4" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">4</label>
+        </div>
+      </div>
+      <div class="col">
+        <label class="control-label" for="enddate">Billing Status (Per Quarter):</label>
+        <div class="form-check form-check-inline">
+          {% if basetable.BC1 == True %}
+          <input class="form-check-input" type="checkbox" id="BC1" name="BC1" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="BC1" name="BC1" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.BC2 == True %}
+          <input class="form-check-input" type="checkbox" id="BC2" name="BC2" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="BC2" name="BC2" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.BC3 == True %}
+          <input class="form-check-input" type="checkbox" id="BC3" name="BC3" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="BC3" name="BC3" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.BC4 == True %}
+          <input class="form-check-input" type="checkbox" id="BC4" name="BC4" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="BC4" name="BC4" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">4</label>
+        </div>
+      </div>
+      </div>
+      <br>
+      <hr class="dotted">
+      <div class="text-center">
+        <button type="submit" name="cancel_button" class="btn btn-primary" value="cancel">Cancel</button>
+        <button type="submit" name="submit_button" class="btn btn-primary" value="submit">Submit</button>
+      </div>
+    </form>
+    </div>
+    <body>
+    </body>
+{% endblock body %}

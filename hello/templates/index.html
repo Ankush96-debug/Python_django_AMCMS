@@ -1,0 +1,369 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock title %}
+{% block body %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    {% load static %}
+    <style>
+      body {
+        margin: 0;
+      }
+      .wrapper {
+        display: flex;
+        height: 7vh;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      .button {
+        border: 1px transparent;
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        color: #eeeeee;
+        cursor: pointer;
+        display: inline-block;
+        font-family: Arial;
+        font-size: 20px;
+        padding: 8px 30px;
+        text-align: center;
+        text-decoration: none;
+        margin-left: 20px;
+        -webkit-animation: glowing 1300ms infinite;
+        -moz-animation: glowing 1300ms infinite;
+        -o-animation: glowing 1300ms infinite;
+        animation: glowing 1300ms infinite;
+      }
+      @-webkit-keyframes glowing {
+        0% {
+          background-color: #0091b2;
+          -webkit-box-shadow: 0 0 3px #0091b2;
+        }
+        50% {
+          background-color: #21c7ed;
+          -webkit-box-shadow: 0 0 15px #21c7ed;
+        }
+        100% {
+          background-color: #0091b2;
+          -webkit-box-shadow: 0 0 3px #0091b2;
+        }
+      }
+      @keyframes glowing {
+        0% {
+          background-color: #0091b2;
+          box-shadow: 0 0 3px #0091b2;
+        }
+        50% {
+          background-color: #21c7ed;
+          box-shadow: 0 0 15px #21c7ed;
+        }
+        100% {
+          background-color: #0091b2;
+          box-shadow: 0 0 3px #0091b2;
+        }
+      }
+      .svg-btn {
+        display: block;
+        width: 230px;
+        height: 230px;
+        margin-left: 10px;
+      }
+      svg {
+        fill: blue;
+        -webkit-animation: glowing-polygon 1300ms infinite;
+        -moz-animation: glowing-polygon 1300ms infinite;
+        -o-animation: glowing-polygon 1300ms infinite;
+        animation: glowing-polygon 1300ms infinite;
+      }
+      @-webkit-keyframes glowing-polygon {
+        0% {
+          fill: #0091b2;
+          -webkit-filter: drop-shadow( 0 0 3px #0091b2);
+        }
+        50% {
+          fill: #21c7ed;
+          -webkit-filter: drop-shadow( 0 0 15px #21c7ed);
+        }
+        100% {
+          fill: #0091b2;
+          -webkit-filter: drop-shadow( 0 0 3px #0091b2);
+        }
+      }
+      @keyframes glowingPolygon {
+        0% {
+          fill: #0091b2;
+          filter: drop-shadow( 0 0 3px #0091b2);
+        }
+        50% {
+          fill: #21c7ed;
+          filter: drop-shadow( 0 0 15px #21c7ed);
+        }
+        100% {
+          fill: #0091b2;
+          filter: drop-shadow( 0 0 3px #0091b2);
+        }
+      }
+      p {
+        font-size: 20px;
+    }
+  
+    .container {
+        background-color: rgb(255, 222, 173);
+        width: 80%;
+            border-radius: 15px;
+    }
+  
+    .skill {
+        background-color: rgb(116, 194, 92);
+        color: white;
+        padding: 1%;
+        text-align: right;
+        font-size: 20px;
+            border-radius: 15px;
+    }
+  
+    .html {
+        width: {{PO_30days_percentage}}%;
+    }
+  
+    .php {
+        width: {{PO_90days_percentage}}%;
+    }
+    h1 {
+      color: white;
+      text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    }
+     
+.b-skills
+{
+	border-top: 1px solid #f9f9f9;
+	padding-top: 20px;
+	text-align: center;
+}
+
+.b-skills:last-child { margin-bottom: -30px; }
+
+.b-skills h2 { margin-bottom: 25px; font-weight: 500; text-transform: uppercase;}
+
+.skill-item
+{
+	position: relative;
+	max-width: 150px;
+	width: 100%;
+	margin-bottom: 30px;
+	color: #555;
+}
+
+.chart-container
+{
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding-top: 75%;
+	margin-bottom: 10px;
+}
+
+.skill-item .chart,
+.skill-item .chart canvas
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.skill-item .chart:before
+{
+	content: "";
+	width: 0;
+	height: 100%;
+}
+
+.skill-item .chart:before,
+.skill-item .percent
+{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.skill-item .percent
+{
+	position: relative;
+	line-height: 1;
+	font-size: 30px;
+	font-weight: 900;
+	z-index: 2;
+}
+
+.skill-item  .percent:after
+{
+	content: attr(data-after);
+	font-size: 20px;
+}
+       
+       p{
+           font-weight: 900;
+       }
+    </style>
+    <title>logged in User</title>
+  </head>
+  <body style="background-color:AntiqueWhite;">
+    <br>
+   <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">AMC Management System</h1>
+      <p class="lead">welcome {{request.user}} to AMS</p>
+    </div>
+  </div>
+   <div class="wrapper">
+    <a class="button" data-toggle="tooltip" data-placement="top" title="No. of POs without PR expiring in next 30 days" href="#">PO without PR and expiring in 30 Days</a>
+    <button type="submit" class="button">{{danger_PO_not_raised}}</button>
+    <!--
+    <a class="svg-btn">
+      <svg height="210" width="200">
+        <polygon points="100,10 40,198 190,78 10,78 160,198" style="fill: #0091b2;" />
+      </svg>
+    </a>
+    -->
+  </div>
+  <br>
+  <div class="wrapper">
+    <a class="button" data-toggle="tooltip" data-placement="top" title="No. of POs whose end dates have passed" href="#">PO Expired</a>
+    <button type="submit" class="button">{{expired_PO}}</button>
+    <!--
+    <a class="svg-btn">
+      <svg height="210" width="200">
+        <polygon points="100,10 40,198 190,78 10,78 160,198" style="fill: #0091b2;" />
+      </svg>
+    </a>
+    -->
+  </div>
+  <br>
+  <div class="d-flex justify-content-center">
+    <button type="button" style="height:80px;width:200px" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Total Current Active PO"><strong>Total PO</strong> <span class="badge"><h1>{{total_PO}}</h1></span></button>
+    <button type="button" style="height:80px;width:200px" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="No. of PR raised"><strong>PR Raised</strong> <span class="badge"><h1>{{PR_raised}}</h1></span></button>    
+    <button type="button" style="height:80px;width:200px" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="No. of POs expiring in next 90 days"><strong>90 Days</strong> <span class="badge"><h1>{{PO_90days}}</h1></span></button>
+    <button type="button" style="height:80px;width:200px" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="No. of POs expiring in next 30 days"><strong>30 Days</strong> <span class="badge"><h1>{{PO_30days}}</h1></span></button>        
+  </div>
+	 <br>
+  <section id="s-team" class="section">
+     
+   
+
+    <div class="b-skills">
+      <div class="container">
+        <h2>Progress</h2>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="skill-item center-block">
+              <div class="chart-container">
+                <div class="chart " data-percent="{{PO_30days_percentage}}" data-bar-color="#23afe3">
+                  <span class="percent" data-after="%">{{PO_30days_percentage}}</span>
+                </div>
+              </div>
+
+              <p>30 Days</p>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="skill-item center-block">
+              <div class="chart-container">
+                <div class="chart " data-percent="{{PO_90days_percentage}}" data-bar-color="#a7d212">
+                  <span class="percent" data-after="%">{{PO_90days_percentage}}</span>
+                </div>
+              </div>
+
+              <p>90 Days</p>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="skill-item center-block">
+              <div class="chart-container">
+                <div class="chart " data-percent="95" data-bar-color="#ff4241">
+                  <span class="percent" data-after="%">95</span>
+                </div>
+              </div>
+
+              <p>Expired</p>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="skill-item center-block">
+              <div class="chart-container">
+                <div class="chart " data-percent="65" data-bar-color="#edc214">
+                  <span class="percent" data-after="%">65</span>
+                </div>
+              </div>
+
+              <p>Billing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<script src="{% static 'js/jquery-2.2.4.min.js'%}"></script>
+  <script src="{% static 'js/jquery.appear.min.js'%}"></script>
+  <script src="{% static 'js/jquery.easypiechart.min.js'%}"></script>
+<script>
+  'use strict';
+
+var $window = $(window);
+
+function run()
+{
+var fName = arguments[0],
+  aArgs = Array.prototype.slice.call(arguments, 1);
+try {
+  fName.apply(window, aArgs);
+} catch(err) {
+   
+}
+};
+
+/* chart
+================================================== */
+function _chart ()
+{
+$('.b-skills').appear(function() {
+  setTimeout(function() {
+    $('.chart').easyPieChart({
+      easing: 'easeOutElastic',
+      delay: 3000,
+      barColor: '#369670',
+      trackColor: '#fff',
+      scaleColor: false,
+      lineWidth: 21,
+      trackWidth: 21,
+      size: 250,
+      lineCap: 'round',
+      onStep: function(from, to, percent) {
+        this.el.children[0].innerHTML = Math.round(percent);
+      }
+    });
+  }, 150);
+});
+};
+
+
+$(document).ready(function() {
+
+run(_chart);
+
+  
+});
+  
+  </script>
+
+
+  </body>
+ 
+</html>
+{% endblock body %} 

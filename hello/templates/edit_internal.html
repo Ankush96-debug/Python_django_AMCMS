@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block title %}
+Edit
+{% endblock title %}
+{% block body %}
+<br>
+<div class="container mb-3 py-4 w-75" style="border:5px solid LightGray;background-color:HoneyDew;"> 
+  <h1 class="text-center"> Edit Existing AMC PO: {{basetable.PO}} </h1>
+  <br>
+    <form "form-horizontal" method="post">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col">
+        <label>Project:</label>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" value={{basetable.project_id}} name="project">
+        {% for result in project_table%}
+        {% if result.id == basetable.project_id %}
+        <option selected value={{result.id}}>{{result.name}}</option>
+        {% else %}
+        <option value={{result.id}}>{{result.name}}</option>
+        {% endif %}
+        {% endfor %}
+        </select>
+      </div>
+      <br>
+      <div class="col">
+        <label>Vendor:</label>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" value={{basetable.vendor_id}} name="vendor">
+        {% for result2 in vendor_table%}
+        {% if result2.id == basetable.vendor_id %}
+        <option selected value={{result2.id}}>{{result2.name}}</option>
+        {% else %}
+        <option value={{result2.id}}>{{result2.name}}</option>
+        {% endif %}
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+    <br>
+      <div class="row g-3">
+        <div class="col">
+        <label class="control-label col-sm-2" for="PO">PO</label>
+        <input type="text" class="form-control" id="PO" name="PO" Value="{{basetable.PO}}"disabled>
+      </div>
+      <div class="col">
+        <label class="control-label" for="oldPO">OLD AMC PO/Supply PO</label>
+        <input type="text" class="form-control" id="oldPO" name="oldPO" Value="{{basetable.oldPO}}">
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="col">
+        <label class="control-label col-sm-2" for="typePO">Type</label>
+        <input type="text" class="form-control" id="typePO" name="typePO" Value="{{basetable.typePO}}">
+      </div>
+      <div class="col">
+        <label class="control-label col-sm-2" for="desc">description</label>
+        <input type="text" class="form-control" id="desc" name="desc" Value="{{basetable.desc}}">
+      </div>
+      <div class="col">
+        <label class="control-label col-sm-2" for="price">Price</label>
+        <input type="text" class="form-control" id="price" name="price" Value="{{basetable.price}}">
+      </div>
+    </div>
+    <br>
+    <div class="row g-3">
+      <div class="col">
+        <label class="control-label col-sm-2" for="startdate">Start Date:</label>
+        <input type="date" id="startdate" name="startdate" Value="{{basetable.startdate|date:'Y-m-d'}}">
+      </div>
+      <div class="col">
+        <label class="control-label col-sm-2" for="enddate">End Date:</label>
+        <input type="date" id="enddate" name="enddate" Value="{{basetable.enddate|date:'Y-m-d'}}">
+      </div>
+    </div>
+    <br>
+    <div class="row g-3">
+      <div class="col">
+        <label class="control-label" for="enddate">PM (Per Quarter):</label>
+        <div class="form-check form-check-inline">
+          {% if basetable.PMC1 == True %}
+          <input class="form-check-input" type="checkbox" id="PMC1" name="PMC1" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="PMC1" name="PMC1" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.PMC2 == True %}
+          <input class="form-check-input" type="checkbox" id="PMC2" name="PMC2" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="PMC2" name="PMC2" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.PMC3 == True %}
+          <input class="form-check-input" type="checkbox" id="PMC3" name="PMC3" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="PMC3" name="PMC3" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.PMC4 == True %}
+          <input class="form-check-input" type="checkbox" id="PMC4" name="PMC4" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="PMC4" name="PMC4" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">4</label>
+        </div>
+      </div>
+      <div class="col">
+        <label class="control-label" for="enddate">Billing Status (Per Quarter):</label>
+        <div class="form-check form-check-inline">
+          {% if basetable.BC1 == True %}
+          <input class="form-check-input" type="checkbox" id="BC1" name="BC1" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="BC1" name="BC1" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.BC2 == True %}
+          <input class="form-check-input" type="checkbox" id="BC2" name="BC2" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="BC2" name="BC2" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.BC3 == True %}
+          <input class="form-check-input" type="checkbox" id="BC3" name="BC3" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="BC3" name="BC3" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          {% if basetable.BC4 == True %}
+          <input class="form-check-input" type="checkbox" id="BC4" name="BC4" value="True" checked>
+          {% else %}
+          <input class="form-check-input" type="checkbox" id="BC4" name="BC4" value="True">
+          {% endif %}
+          <label class="form-check-label" for="inlineCheckbox1">4</label>
+        </div>
+      </div>
+      </div>
+      <br>
+      
+      <hr class="solid">
+      
+      <div class="row">
+      <div class="col">
+        <label class="control-label col-sm-2" for="PR">PR</label>
+        <input type="text" class="form-control" id="PR" name="PR" Value="{{basetable.PR}}">
+      </div>
+      <div class="col">
+        <label class="control-label col-sm-2" for="PRdate">PR Date:</label>
+        <input type="date" class="form-control" id="PRdate" name="PRdate" Value="{{basetable.PRdate|date:'Y-m-d'}}">
+      </div>
+      </div>
+      <br>
+      <hr class="dotted">
+      <div class="text-center">
+        <button type="submit" name="cancel_button" class="btn btn-primary" value="cancel">Cancel</button>
+        <button type="submit" name="submit_button" class="btn btn-primary" value="submit">Submit</button>
+        <button type="submit" name="expire_button" class="btn btn-primary" value="expire">Cabinet</button>
+        <button type="submit" name="delete_button" class="btn btn-primary" value="delete">Delete</button>
+      </div>
+    </form>
+    </div>
+    <body>
+    </body>
+{% endblock body %}
